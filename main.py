@@ -37,6 +37,8 @@ def examine(object):
         print("\nYou don't see anything interesting about that.")
 
 # Main gameloop
+print_location()  # Print location description at the beginning of the game        
+
 while True:
     action = input("\nWhat do you want to do? (look, go north, examine) ").strip().lower()
 
