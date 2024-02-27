@@ -1,34 +1,31 @@
-# Define a dictionary for a location
+# Define the starting location
 location = {
-    "name": "Starting Room",
-    "description": "You are in a dark room. There is a door to the north.",
-    "exits": {"north": "Next Room"},
+    "name": "Crime Scene",
+    "description": """
+You stand in a grimy alleyway, rain mixing with the neon glow reflecting from above. sThe body of a young hacker lies sprawled at your feet, a data chip embedded in their wrist. The smell of ramen and blood hangs heavy in the air.
+""",
+    "exits": {"north": "Ramen Bar"},
 }
 
-# Function to handle player movement
-def move(direction):
-    if direction in location["exits"]:
-        # Update current location
-        location = get_location(location["exits"][direction])
-        print(f"You move {direction}.")
-        print_location()
+# Add a function to examine objects
+def examine(object):
+    if object == "body":
+        print("The body is cold and stiff. You notice a data chip embedded in the wrist.")
     else:
-        print("There is no exit in that direction.")
+        print("You don'.t see anything interesting about that.")
 
-# Function to print location details
-def print_location():
-    print(f"\nLocation: {location['name']}")
-    print(f"\n{location['description']}")
-
-# Main game loop
+# Update the game loop to handle "examine" action
 while True:
-    print_location()
-    action = input("\nWhat do you want to do? (look, go north, etc.) ").strip().lower()
-    
-    if action == "look":
-        print_location()
-    elif action.startswith("go "):
-        direction = action.split()[1]
+     print_location()
+     action = input("\nWhat do you want to do? (look, go north, examine) ").strip().lower()
+
+     if action == "look":
+         print_location()
+     elif action.startswith("go "):
+         direction = action.split()[1]
         move(direction)
+    elif action.startswith("examine "):
+         object = action.split()[1]
+         examine(object)
     else:
         print("Invalid action.")
